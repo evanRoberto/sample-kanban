@@ -1,4 +1,5 @@
 .App {
+  padding: 15px;
 }
 
 .board {
@@ -6,6 +7,10 @@
   height: 800px;
   border: solid 1px #000;
   display: inline-block;
+}
+
+.board:nth-child(1) {
+
 }
 
 .board-header {
