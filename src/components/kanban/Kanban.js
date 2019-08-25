@@ -4,16 +4,6 @@ import styled from '@emotion/styled';
 
 import { CATEGORIES } from '../../constants'
 import KanbanColumn from "../../components/kanban-column/KanbanColumn";
-import './Kanban.css';
-
-// const categoryLabels = {
-//   backlog: 'Backlog',
-//   todo: 'To-do',
-//   doing: 'Doing',
-//   completed: 'Completed',
-//   qa: 'QA',
-//   closed: 'Closed'
-// };
 
 const Container = styled.div`
   background-color: #4C9AFF;

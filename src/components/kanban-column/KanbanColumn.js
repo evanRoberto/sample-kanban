@@ -2,7 +2,7 @@ import React from 'react';
 import { Draggable } from 'react-beautiful-dnd';
 import styled from '@emotion/styled';
 
-import { grid, borderRadius } from '../../constants';
+import { grid, borderRadius, categoryLabels } from '../../constants';
 import Title from "../../components/title/Title";
 import TaskList from "../../components/task-list/TaskList";
 
@@ -34,7 +34,7 @@ const KanbanColumn = ({ title, tasks, index }) => {
           <Header isDragging={snapshot.isDragging}>
             <Title isDragging={snapshot.isDragging}
               {...provided.dragHandleProps}>
-              {title}
+              {categoryLabels[title]}
             </Title>
           </Header>
           <TaskList
