@@ -74,6 +74,15 @@ const Footer = styled.div`
   align-items: center;
 `;
 
+const TaskId = styled.small`
+  flex-grow: 1;
+  flex-shrink: 1;
+  margin: 0;
+  font-weight: normal;
+  text-overflow: ellipsis;
+  text-align: right;
+`;
+
 
 function TaskItem(props) {
   const { task, isDragging, provided } = props;
@@ -87,7 +96,7 @@ function TaskItem(props) {
       <Content>
         <BlockTask>{task.content}</BlockTask>
         <Footer>
-          <taskId>id:{task.id}</taskId>
+          <TaskId>id:{task.id}</TaskId>
         </Footer>
       </Content>
     </Container>

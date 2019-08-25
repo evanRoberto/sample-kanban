@@ -100,7 +100,7 @@ const Kanban = (props) => {
 
     if (result.type === 'COLUMN') {
       const ordered = reorder(
-        this.state.ordered,
+        categories,
         source.index,
         destination.index,
       );
@@ -111,7 +111,7 @@ const Kanban = (props) => {
     }
 
     const data = reorderQuoteMap({
-      taskMap: this.state.columns,
+      taskMap: columns,
       source,
       destination,
     });
@@ -148,18 +148,5 @@ const Kanban = (props) => {
     </>
   );
 };
-
-
-{/*<div className="row">*/}
-  {/*{categories.map((category, index) => (*/}
-    {/*<div key={index} className="col">*/}
-      {/*<div className="board">*/}
-        {/*<div className="board-header">*/}
-          {/*{categoryLabels[category]}*/}
-        {/*</div>*/}
-      {/*</div>*/}
-    {/*</div>*/}
-  {/*))}*/}
-{/*</div>*/}
 
 export default Kanban;
