@@ -55,22 +55,24 @@ const reorderQuoteMap = ({ taskMap, source, destination }) => {
 const getByStatus = (tasks, status) => tasks.filter(task => task.status === status);
 
 const Kanban = (props) => {
-  const [tasks] = useState(
-    localStorage.getItem('tasks')
-      ? JSON.parse(localStorage.getItem('tasks'))
-      : [
-        { id: 1, content: 'A feature requested from user to improve overall efficiency.', status: CATEGORIES.BACKLOG },
-        { id: 2, content: 'Enhancement requested from product owner to improve overall design.', status: CATEGORIES.BACKLOG }
-      ]
-  );
+  const [tasks, setTasks] = useState([
+    { id: 1, content: 'A feature requested from user to improve overall efficiency.', status: CATEGORIES.BACKLOG },
+    { id: 2, content: 'Enhancement requested from product owner to improve overall design.', status: CATEGORIES.BACKLOG }
+  ]);
 
   const [categories, setCategories] = useState(Object.values(CATEGORIES));
 
   const [columns, setColumns] = useState(
-    categories.reduce((acc, val) => ({
-      ...acc,
-      [val]: getByStatus(tasks, val)
-    }), {})
+    categories.reduce((acc, val) => {
+      console.log({
+        ...acc,
+        [val]: getByStatus(tasks, val)
+      });
+      return {
+        ...acc,
+        [val]: getByStatus(tasks, val)
+      }
+    }, {})
   );
 
   const handleDragEnd = (result) => {
@@ -109,6 +111,21 @@ const Kanban = (props) => {
     setColumns(data.taskMap);
   };
 
+  const addTask = (taskContent) => {
+    const newTask = {
+      id: tasks[tasks.length -1]['id']++,
+      content: taskContent,
+      status: CATEGORIES.BACKLOG
+    };
+
+    setTasks([...tasks, newTask]);
+
+    console.log('addTask', columns);
+    // console.log('columns', columns[CATEGORIES.BACKLOG].push());
+  };
+
+  console.log('ngentot', columns);
+
   const board = (
     <Droppable
       droppableId="board"
@@ -122,6 +139,7 @@ const Kanban = (props) => {
               index={index}
               title={key}
               tasks={columns[key]}
+              onAdd={(taskContent) => addTask(taskContent)}
             />
           ))}
           {provided.placeholder}

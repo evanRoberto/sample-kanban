@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Draggable } from 'react-beautiful-dnd';
 import styled from '@emotion/styled';
 
@@ -26,7 +26,13 @@ const Header = styled.div`
   }
 `;
 
-const KanbanColumn = ({ title, tasks, index }) => {
+const KanbanColumn = ({ title, tasks, index, onAdd }) => {
+  // console.log('KanbanColumn', tasks);
+
+  // useEffect(() => {
+  //   console.log('tasks changed', tasks);
+  // });
+
   return (
     <Draggable draggableId={title} index={index}>
       {(provided, snapshot) => (
@@ -41,6 +47,7 @@ const KanbanColumn = ({ title, tasks, index }) => {
             listId={title}
             listType="TASK"
             tasks={tasks}
+            onAdd={onAdd}
             style={{ backgroundColor: snapshot.isDragging ? '#E3FCEF' : null }}
           />
         </Container>

@@ -4,7 +4,8 @@ import styled from '@emotion/styled';
 
 import Title from "../../components/title/Title";
 import TaskItem from "../../components/task-item/TaskItem";
-import { grid } from '../../constants';
+import TaskAdd from "../../components/task-add/TaskAdd";
+import { grid, CATEGORIES } from '../../constants';
 
 const getBackgroundColor = (isDraggingOver, isDraggingFrom) => {
   if (isDraggingOver) {
@@ -19,8 +20,7 @@ const getBackgroundColor = (isDraggingOver, isDraggingFrom) => {
 };
 
 const Wrapper = styled.div`
-  background-color: ${props =>
-  getBackgroundColor(props.isDraggingOver, props.isDraggingFrom)};
+  background-color: ${props => getBackgroundColor(props.isDraggingOver, props.isDraggingFrom)};
   display: flex;
   flex-direction: column;
   opacity: ${({ isDropDisabled }) => (isDropDisabled ? 0.5 : 'inherit')};
@@ -64,12 +64,16 @@ const InnerList = (props) => {
       <DropZone ref={dropProvided.innerRef}>
         <InnerTaskList tasks={tasks} />
         {dropProvided.placeholder}
+        {props.listId === CATEGORIES.BACKLOG &&
+          <TaskAdd tasks={props.tasks} onAdd={props.onAdd}/>
+        }
       </DropZone>
     </>
   );
 };
 
-const TaskList = ({ listId, listType, tasks, style }) => {
+const TaskList = ({ listId, listType, tasks, style, onAdd }) => {
+  // console.log('TaskList', tasks);
   return (
     <Droppable
       droppableId={listId}
@@ -81,8 +85,10 @@ const TaskList = ({ listId, listType, tasks, style }) => {
           isDraggingFrom={Boolean(dropSnapshot.draggingFromThisWith)}
           {...dropProvided.droppableProps}>
           <InnerList
+            listId={listId}
             tasks={tasks}
             dropProvided={dropProvided}
+            onAdd={onAdd}
           />
         </Wrapper>
       )}

@@ -17,10 +17,8 @@ const Container = styled.a`
   border-radius: ${borderRadius}px;
   border: 2px solid transparent;
   border-color: ${props => getBorderColor(props.isDragging)};
-  background-color: ${props =>
-  getBackgroundColor(props.isDragging)};
-  box-shadow: ${({ isDragging }) =>
-  isDragging ? `2px 2px 1px #A5ADBA` : 'none'};
+  background-color: ${props => getBackgroundColor(props.isDragging)};
+  box-shadow: ${({ isDragging }) => isDragging ? '2px 2px 1px #A5ADBA' : 'none'};
   padding: ${grid}px;
   min-height: 40px;
   margin-bottom: ${grid}px;
@@ -44,16 +42,8 @@ const Container = styled.a`
 `;
 
 const Content = styled.div`
-  /* flex child */
   flex-grow: 1;
-
-  /*
-    Needed to wrap text in ie11
-    https://stackoverflow.com/questions/35111090/why-ie11-doesnt-wrap-the-text-in-flexbox
-  */
   flex-basis: 100%;
-
-  /* flex parent */
   display: flex;
   flex-direction: column;
 `;
