@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import styled from '@emotion/styled';
 
@@ -64,10 +64,7 @@ const Kanban = (props) => {
 
   const [columns, setColumns] = useState(
     categories.reduce((acc, val) => {
-      console.log({
-        ...acc,
-        [val]: getByStatus(tasks, val)
-      });
+      console.log('reducer', val, getByStatus(tasks, val));
       return {
         ...acc,
         [val]: getByStatus(tasks, val)
@@ -118,13 +115,13 @@ const Kanban = (props) => {
       status: CATEGORIES.BACKLOG
     };
 
-    setTasks([...tasks, newTask]);
-
-    console.log('addTask', columns);
-    // console.log('columns', columns[CATEGORIES.BACKLOG].push());
+    setTasks((preTasks) => [...preTasks, newTask]);
   };
 
-  console.log('ngentot', columns);
+  console.log('columns changed', columns);
+  useEffect(() => {
+    console.log('useEffect columns changed', columns);
+  }, [columns]);
 
   const board = (
     <Droppable
