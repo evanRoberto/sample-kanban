@@ -12,6 +12,8 @@ const Container = styled.div`
   display: inline-flex;
 `;
 
+let nextId = 2;
+
 const reorder = (list, startIndex, endIndex) => {
   const result = Array.from(list);
   const [removed] = result.splice(startIndex, 1);
@@ -62,15 +64,13 @@ const Kanban = (props) => {
 
   const [categories, setCategories] = useState(Object.values(CATEGORIES));
 
-  const [columns, setColumns] = useState(
-    categories.reduce((acc, val) => {
-      console.log('reducer', val, getByStatus(tasks, val));
-      return {
-        ...acc,
-        [val]: getByStatus(tasks, val)
-      }
-    }, {})
-  );
+  const categoriesReducerFunc = (acc, val) => ({
+    ...acc,
+    [val]: getByStatus(tasks, val)
+  });
+  const categoriesReducer = categories.reduce(categoriesReducerFunc, {});
+
+  const [columns, setColumns] = useState(categoriesReducer);
 
   const handleDragEnd = (result) => {
     if (!result.destination) {
@@ -110,7 +110,7 @@ const Kanban = (props) => {
 
   const addTask = (taskContent) => {
     const newTask = {
-      id: tasks[tasks.length -1]['id']++,
+      id: ++nextId,
       content: taskContent,
       status: CATEGORIES.BACKLOG
     };
@@ -118,10 +118,9 @@ const Kanban = (props) => {
     setTasks((preTasks) => [...preTasks, newTask]);
   };
 
-  console.log('columns changed', columns);
   useEffect(() => {
-    console.log('useEffect columns changed', columns);
-  }, [columns]);
+    setColumns(categoriesReducer);
+  }, [tasks]);
 
   const board = (
     <Droppable

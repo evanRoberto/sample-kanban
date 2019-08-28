@@ -3,8 +3,8 @@ import { Draggable } from 'react-beautiful-dnd';
 import styled from '@emotion/styled';
 
 import { grid, borderRadius, categoryLabels } from '../../constants';
-import Title from "../../components/title/Title";
-import TaskList from "../../components/task-list/TaskList";
+import Title from '../../components/title/Title';
+import TaskList from '../../components/task-list/TaskList';
 
 const Container = styled.div`
   margin: ${grid}px;
@@ -27,11 +27,9 @@ const Header = styled.div`
 `;
 
 const KanbanColumn = ({ title, tasks, index, onAdd }) => {
-  // console.log('KanbanColumn', tasks);
-
   // useEffect(() => {
   //   console.log('tasks changed', tasks);
-  // });
+  // }, [tasks]);
 
   return (
     <Draggable draggableId={title} index={index}>
@@ -45,7 +43,7 @@ const KanbanColumn = ({ title, tasks, index, onAdd }) => {
           </Header>
           <TaskList
             listId={title}
-            listType="TASK"
+            listType='TASK'
             tasks={tasks}
             onAdd={onAdd}
             style={{ backgroundColor: snapshot.isDragging ? '#E3FCEF' : null }}

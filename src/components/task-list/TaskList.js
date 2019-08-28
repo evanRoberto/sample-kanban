@@ -2,19 +2,15 @@ import React from 'react';
 import { Draggable, Droppable } from 'react-beautiful-dnd';
 import styled from '@emotion/styled';
 
-import Title from "../../components/title/Title";
-import TaskItem from "../../components/task-item/TaskItem";
-import TaskAdd from "../../components/task-add/TaskAdd";
+import Title from '../../components/title/Title';
+import TaskItem from '../../components/task-item/TaskItem';
+import TaskAdd from '../../components/task-add/TaskAdd';
 import { grid, CATEGORIES } from '../../constants';
 
 const getBackgroundColor = (isDraggingOver, isDraggingFrom) => {
-  if (isDraggingOver) {
-    return '#FFEBE5';
-  }
+  if (isDraggingOver) return '#FFEBE5';
 
-  if (isDraggingFrom) {
-    return '#E6FCFF';
-  }
+  if (isDraggingFrom) return '#E6FCFF';
 
   return '#EBECF0';
 };
@@ -32,11 +28,13 @@ const Wrapper = styled.div`
   width: 250px;
 `;
 
-const scrollContainerHeight = 250;
+const scrollContainerHeight = 300;
 
 const DropZone = styled.div`
+  position: relative;
   min-height: ${scrollContainerHeight}px;
   padding-bottom: ${grid}px;
+  margin-bottom: 96px;
 `;
 
 const InnerTaskList = React.memo((props) => {
@@ -73,7 +71,6 @@ const InnerList = (props) => {
 };
 
 const TaskList = ({ listId, listType, tasks, style, onAdd }) => {
-  // console.log('TaskList', tasks);
   return (
     <Droppable
       droppableId={listId}
