@@ -42,6 +42,7 @@ const reorderQuoteMap = ({ taskMap, source, destination }) => {
 
   current.splice(source.index, 1);
   next.splice(destination.index, 0, target);
+  next[0]['status'] = destination.droppableId;
 
   const result = {
     ...taskMap,

@@ -4,9 +4,7 @@ import styled from '@emotion/styled';
 import { grid, borderRadius } from '../../constants';
 
 const getBackgroundColor = (isDragging) => {
-  if (isDragging) {
-    return '#DEEBFF';
-  }
+  if (isDragging) return '#DEEBFF';
 
   return '#FFFFFF';
 };
