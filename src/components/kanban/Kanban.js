@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import styled from '@emotion/styled';
+import Row from 'react-bootstrap/Row';
 
 import { CATEGORIES } from '../../constants'
 import KanbanColumn from "../../components/kanban-column/KanbanColumn";
@@ -130,16 +131,18 @@ const Kanban = (props) => {
       direction="horizontal">
       {(provided) => (
         <Container ref={provided.innerRef} {...provided.droppableProps}>
-          {categories.map((key, index) => (
-            <KanbanColumn
-              key={key}
-              index={index}
-              title={key}
-              tasks={columns[key]}
-              onAdd={(taskContent) => addTask(taskContent)}
-            />
-          ))}
-          {provided.placeholder}
+          <Row>
+            {categories.map((key, index) => (
+              <KanbanColumn
+                key={key}
+                index={index}
+                title={key}
+                tasks={columns[key]}
+                onAdd={(taskContent) => addTask(taskContent)}
+              />
+            ))}
+            {provided.placeholder}
+          </Row>
         </Container>
       )}
     </Droppable>
